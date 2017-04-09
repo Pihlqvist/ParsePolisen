@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">Parse Polisen</string>
-    <string name="polisenRSS">https://polisen.se/Stockholms_lan/Aktuellt/RSS/Lokal-RSS---Pressmeddelanden/Lokala-RSS-listor/Press-RSS---Nationella/?feed=rss</string>
+    <string name="handelser">https://polisen.se/Stockholms_lan/Aktuellt/RSS/Lokal-RSS---Handelser/Lokala-RSS-listor1/Handelser-RSS---Stockholms-lan/?feed=rss</string>
+    <string name="press">https://polisen.se/Stockholms_lan/Aktuellt/RSS/Lokal-RSS---Pressmeddelanden/Lokala-RSS-listor/Press-RSS---Stockholms-lan/?feed=rss</string>
+    <string name="nyheter">https://polisen.se/Stockholms_lan/Aktuellt/RSS/Lokal-RSS---Nyheter/Lokala-RSS-listor1/Nyheter-RSS---Stockholms-lan/?feed=rss</string>
 </resources>

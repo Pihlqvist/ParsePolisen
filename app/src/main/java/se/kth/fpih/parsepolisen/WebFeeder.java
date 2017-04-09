@@ -1,6 +1,7 @@
 package se.kth.fpih.parsepolisen;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -23,12 +24,14 @@ import static android.content.ContentValues.TAG;
 
 public class WebFeeder extends Activity {
 
-    public final String URL = "https://polisen.se/Stockholms_lan/Aktuellt/RSS/Lokal-RSS---Pressmeddelanden/Lokala-RSS-listor/Press-RSS---Nationella/?feed=rss";
+    public String URL = null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_webview);
+        Intent intent = getIntent();
+        URL = intent.getStringExtra("URL");
         loadPage();
     }
 
