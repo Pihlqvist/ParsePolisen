@@ -2,6 +2,8 @@ package se.kth.fpih.parsepolisen;
 
 import android.app.Activity;
 import android.os.AsyncTask;
+import android.os.Bundle;
+import android.view.View;
 import android.webkit.WebView;
 
 import org.xmlpull.v1.XmlPullParserException;
@@ -11,14 +13,24 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
+import android.util.Log;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * Created by Fredrik Pihlqvist on 2017-04-08.
  */
 
-public class WebFeeder extends Activity{
+public class WebFeeder extends Activity {
 
-    public final String URL = getString(R.string.polisenRSS);
+    public final String URL = "https://polisen.se/Stockholms_lan/Aktuellt/RSS/Lokal-RSS---Pressmeddelanden/Lokala-RSS-listor/Press-RSS---Nationella/?feed=rss";
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_webview);
+        loadPage();
+    }
 
     // Uses AsyncTask to download the XML feed from polisen.se
     public void loadPage() {
@@ -39,10 +51,8 @@ public class WebFeeder extends Activity{
 
         @Override
         protected void onPostExecute(String result) {
-            setContentView(R.layout.activity_main);
-            // Displays the HTML string in the UI via a WebView
             WebView myWebView = (WebView) findViewById(R.id.webviewer);
-            myWebView.loadData(result, "text/html", null);
+            myWebView.loadData(result, "text/html; charset=UTF-8", null);
         }
     }
 
@@ -51,10 +61,6 @@ public class WebFeeder extends Activity{
         // Instantiate the parser
         PolisenXmlParser polisenXmlParser = new PolisenXmlParser();
         List<PolisenXmlParser.Item> items = null;
-        String title = null;
-        String link = null;
-        String description = null;
-        String pubDate = null;
 
         try {
             stream = downloadUrl(urlString);
@@ -71,26 +77,28 @@ public class WebFeeder extends Activity{
         // Each entry is displayed in the UI as a link that optionally includes
         // a text summery
         StringBuilder htmlString = new StringBuilder();
+        htmlString.append("<body>");
         for (PolisenXmlParser.Item item : items) {
-            htmlString.append("<h1>" + item.title + "</h1>");
-            htmlString.append("<a> href=\"" + item.link + "\">" + "Polisen link</a>");
-            htmlString.append("<p>" + item.description + "</p");
+            htmlString.append("<h2>" + item.title + "</h2>");
+            htmlString.append("<a href=\"" + item.link + "\">" + "Polisen link</a>");
+            htmlString.append("<p>" + item.description + "</p>");
             htmlString.append("<p>" + item.pubDate + "</p>");
         }
+        htmlString.append("</body>");
         return htmlString.toString();
     }
 
     // Given a string representation of a URL, sets up a connection and gets
     // an input steam
-    private InputStream downloadUrl(String urlString) throws IOException {
+    public InputStream downloadUrl(String urlString) throws IOException {
         URL url = new URL(urlString);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setReadTimeout(10000 /* milliseconds */);
-        conn.setConnectTimeout(15000 /* milliseconds*/);
+        //conn.setReadTimeout(10000 /* milliseconds */);
+        //conn.setConnectTimeout(15000 /* milliseconds*/);
         conn.setRequestMethod("GET");
         conn.setDoInput(true);
         // Starts the query
-        conn.connect();
+        conn.connect(); // Gave internet access to the app and the problem disappeared
         return conn.getInputStream();
     }
 

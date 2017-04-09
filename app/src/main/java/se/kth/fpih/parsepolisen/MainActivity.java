@@ -1,18 +1,18 @@
 package se.kth.fpih.parsepolisen;
 
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.util.Log;
 
 
 public class MainActivity extends AppCompatActivity {
 
-
     public void onClick(View view) {
-        setContentView(R.layout.activity_webview);
-        //WebFeeder.loadPage();
-
+        Intent intent = new Intent(this, WebFeeder.class);
+        startActivity(intent);
     }
 
     @Override
