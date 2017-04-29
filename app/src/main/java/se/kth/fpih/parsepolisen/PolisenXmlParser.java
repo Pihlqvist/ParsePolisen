@@ -1,8 +1,5 @@
 package se.kth.fpih.parsepolisen;
 
-import android.util.Log;
-import android.util.Xml;
-
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -14,6 +11,10 @@ import java.util.List;
 
 /**
  * Created by Fredrik Pihlqvist on 2017-04-07.
+ *
+ * This parses the inputstream from the Swedish Police and stores it into a array
+ * made of specific objects.
+ *
  */
 
 public class PolisenXmlParser {

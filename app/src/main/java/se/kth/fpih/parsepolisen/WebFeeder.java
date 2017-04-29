@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.View;
 import android.webkit.WebView;
 
 import org.xmlpull.v1.XmlPullParserException;
@@ -14,12 +13,14 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
-import android.util.Log;
 
-import static android.content.ContentValues.TAG;
 
 /**
  * Created by Fredrik Pihlqvist on 2017-04-08.
+ *
+ * This activity takes a RSS feed from a the Swedish Police and returns the
+ * diffirent information into an HTML view on the phone.
+ *
  */
 
 public class WebFeeder extends Activity {
@@ -96,12 +97,10 @@ public class WebFeeder extends Activity {
     public InputStream downloadUrl(String urlString) throws IOException {
         URL url = new URL(urlString);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        //conn.setReadTimeout(10000 /* milliseconds */);
-        //conn.setConnectTimeout(15000 /* milliseconds*/);
         conn.setRequestMethod("GET");
         conn.setDoInput(true);
         // Starts the query
-        conn.connect(); // Gave internet access to the app and the problem disappeared
+        conn.connect();
         return conn.getInputStream();
     }
 

@@ -7,6 +7,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.util.Log;
 
+/*
+*   Created by Fredrik Pihlqvist on 2017-04-08.
+*
+*   This is the Main Activity of my app and this will present 3 buttons
+*   that will take the user to a specific view that is affected by
+*   what button is pressed.
+*
+ */
+
+
 
 public class MainActivity extends AppCompatActivity {
 
