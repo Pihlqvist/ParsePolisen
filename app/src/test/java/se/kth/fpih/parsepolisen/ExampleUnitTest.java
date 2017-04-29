@@ -15,4 +15,15 @@ public class ExampleUnitTest {
     public void addition_isCorrect() throws Exception {
         assertEquals(4, 2 + 2);
     }
+
+    @Test
+    public void tinker() {
+        System.out.println("START_OF_TEST");
+        runTest();
+        System.out.println("END_OF_TEST");
+    }
+
+    private void runTest() {
+
+    }
 }
